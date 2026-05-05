@@ -50,7 +50,10 @@ export class ApiService {
   }
 
   appointments(filters: { date?: string; status?: AppointmentStatus } = {}) {
-    return this.http.get<Appointment[]>(`${this.apiUrl}/appointments`, { params: { ...filters } });
+    const params: Record<string, string> = {};
+    if (filters.date) params['date'] = filters.date;
+    if (filters.status) params['status'] = filters.status;
+    return this.http.get<Appointment[]>(`${this.apiUrl}/appointments`, { params });
   }
 
   saveAppointment(appointment: Appointment) {
@@ -67,4 +70,3 @@ export class ApiService {
     return this.http.patch<Appointment>(`${this.apiUrl}/appointments/${id}/done`, {});
   }
 }
-
