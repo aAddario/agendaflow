@@ -56,6 +56,8 @@ O backend usa PostgreSQL local por padrão:
 
 Em produção, defina `JWT_SECRET` com valor forte.
 
+Para desenvolvimento local, copie `.env.example` para `.env` e exporte as variáveis antes de iniciar o backend.
+
 ## Endpoints principais
 
 - `POST /api/auth/register`

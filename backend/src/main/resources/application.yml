@@ -15,8 +15,7 @@ server:
 
 app:
   jwt:
-    secret: ${JWT_SECRET:change-this-development-secret-change-this-now}
+    secret: ${JWT_SECRET}
     expiration-minutes: ${JWT_EXPIRATION_MINUTES:480}
   cors:
     allowed-origin: ${CORS_ALLOWED_ORIGIN:http://localhost:4200}
-
