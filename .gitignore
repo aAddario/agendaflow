@@ -7,6 +7,7 @@ plano-apresentacao-agendaflow.md
 .env.*
 !.env.example
 application-local.yml
+git-store/
 
 # Java / Maven
 target/
@@ -26,4 +27,3 @@ npm-debug.log*
 .vscode/
 *.iml
 .DS_Store
-
