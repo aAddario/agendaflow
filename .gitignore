@@ -1,0 +1,29 @@
+# Private planning notes
+plano-implementacao-agendaflow-java-spring-angular.md
+plano-apresentacao-agendaflow.md
+
+# Local environment
+.env
+.env.*
+!.env.example
+application-local.yml
+
+# Java / Maven
+target/
+*.class
+*.jar
+*.war
+.mvn/wrapper/maven-wrapper.jar
+
+# Node / Angular
+node_modules/
+dist/
+.angular/
+npm-debug.log*
+
+# IDE / OS
+.idea/
+.vscode/
+*.iml
+.DS_Store
+
