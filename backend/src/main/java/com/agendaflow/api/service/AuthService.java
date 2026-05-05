@@ -28,7 +28,7 @@ public class AuthService {
 
   public AuthResponse register(RegisterRequest request) {
     if (users.existsByEmail(request.email())) {
-      throw new ApiException(HttpStatus.CONFLICT, "Email already registered.");
+      throw new ApiException(HttpStatus.CONFLICT, "Email já cadastrado.");
     }
     var user = new User();
     user.setName(request.name());
@@ -41,7 +41,7 @@ public class AuthService {
 
   public AuthResponse login(LoginRequest request) {
     authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.email(), request.password()));
-    var user = users.findByEmail(request.email()).orElseThrow(() -> new ApiException(HttpStatus.UNAUTHORIZED, "Invalid credentials."));
+    var user = users.findByEmail(request.email()).orElseThrow(() -> new ApiException(HttpStatus.UNAUTHORIZED, "Credenciais inválidas."));
     return response(user);
   }
 
@@ -49,4 +49,3 @@ public class AuthService {
     return new AuthResponse(jwtService.generate(user), new UserResponse(user.getId(), user.getName(), user.getEmail(), user.getRole()));
   }
 }
-

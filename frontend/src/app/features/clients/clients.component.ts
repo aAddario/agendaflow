@@ -7,28 +7,28 @@ import { Client } from '../../core/models';
   standalone: true,
   imports: [ReactiveFormsModule],
   template: `
-    <header class="page-header"><h1>Clients</h1></header>
+    <header class="page-header"><h1>Clientes</h1></header>
     <section class="grid-two">
       <form class="panel" [formGroup]="form" (ngSubmit)="save()">
-        <h2>{{ editingId ? 'Edit client' : 'New client' }}</h2>
-        <label>Name <input formControlName="name"></label>
-        <label>Phone <input formControlName="phone"></label>
+        <h2>{{ editingId ? 'Editar cliente' : 'Novo cliente' }}</h2>
+        <label>Nome <input formControlName="name"></label>
+        <label>Telefone <input formControlName="phone"></label>
         <label>Email <input type="email" formControlName="email"></label>
-        <label>Notes <textarea formControlName="notes"></textarea></label>
-        <button type="submit" [disabled]="form.invalid">Save</button>
-        <button type="button" class="ghost" (click)="reset()">Clear</button>
+        <label>Observações <textarea formControlName="notes"></textarea></label>
+        <button type="submit" [disabled]="form.invalid">Salvar</button>
+        <button type="button" class="ghost" (click)="reset()">Limpar</button>
       </form>
       <section class="panel">
         <table>
-          <thead><tr><th>Name</th><th>Phone</th><th></th></tr></thead>
+          <thead><tr><th>Nome</th><th>Telefone</th><th></th></tr></thead>
           <tbody>
             @for (client of clients; track client.id) {
               <tr>
                 <td>{{ client.name }}</td>
                 <td>{{ client.phone }}</td>
                 <td class="actions">
-                  <button type="button" (click)="edit(client)">Edit</button>
-                  <button type="button" class="danger" (click)="remove(client)">Delete</button>
+                  <button type="button" (click)="edit(client)">Editar</button>
+                  <button type="button" class="danger" (click)="remove(client)">Excluir</button>
                 </td>
               </tr>
             }
@@ -66,4 +66,3 @@ export class ClientsComponent implements OnInit {
     this.form.reset();
   }
 }
-

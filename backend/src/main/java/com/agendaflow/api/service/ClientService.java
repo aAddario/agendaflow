@@ -37,7 +37,7 @@ public class ClientService {
   }
 
   Client get(Long id) {
-    return clients.findById(id).orElseThrow(() -> new ApiException(HttpStatus.NOT_FOUND, "Client not found."));
+    return clients.findById(id).orElseThrow(() -> new ApiException(HttpStatus.NOT_FOUND, "Cliente não encontrado."));
   }
 
   private Client apply(Client client, ClientRequest request) {
@@ -52,4 +52,3 @@ public class ClientService {
     return new ClientResponse(client.getId(), client.getName(), client.getPhone(), client.getEmail(), client.getNotes());
   }
 }
-

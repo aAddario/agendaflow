@@ -27,12 +27,12 @@ public class GlobalExceptionHandler {
   @ExceptionHandler(AuthenticationException.class)
   ResponseEntity<ApiError> handleAuthentication(AuthenticationException ex) {
     return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-        .body(new ApiError(401, "Invalid credentials.", LocalDateTime.now()));
+        .body(new ApiError(401, "Credenciais inválidas.", LocalDateTime.now()));
   }
 
   @ExceptionHandler(Exception.class)
   ResponseEntity<ApiError> handleGeneric(Exception ex) {
     return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-        .body(new ApiError(500, "Unexpected server error.", LocalDateTime.now()));
+        .body(new ApiError(500, "Erro inesperado no servidor.", LocalDateTime.now()));
   }
 }

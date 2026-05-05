@@ -1,6 +1,9 @@
 import { bootstrapApplication } from '@angular/platform-browser';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { registerLocaleData } from '@angular/common';
+import localePt from '@angular/common/locales/pt';
 import { provideRouter, Routes } from '@angular/router';
+import { DEFAULT_CURRENCY_CODE, LOCALE_ID } from '@angular/core';
 import { AppComponent } from './app/app.component';
 import { authGuard } from './app/core/auth.guard';
 import { jwtInterceptor } from './app/core/jwt.interceptor';
@@ -22,10 +25,13 @@ const routes: Routes = [
   { path: '**', redirectTo: 'dashboard' }
 ];
 
+registerLocaleData(localePt);
+
 bootstrapApplication(AppComponent, {
   providers: [
     provideRouter(routes),
-    provideHttpClient(withInterceptors([jwtInterceptor]))
+    provideHttpClient(withInterceptors([jwtInterceptor])),
+    { provide: LOCALE_ID, useValue: 'pt-BR' },
+    { provide: DEFAULT_CURRENCY_CODE, useValue: 'BRL' }
   ]
 }).catch(err => console.error(err));
-

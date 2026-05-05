@@ -39,7 +39,7 @@ public class ServiceItemService {
   }
 
   ServiceItem get(Long id) {
-    return services.findById(id).orElseThrow(() -> new ApiException(HttpStatus.NOT_FOUND, "Service not found."));
+    return services.findById(id).orElseThrow(() -> new ApiException(HttpStatus.NOT_FOUND, "Serviço não encontrado."));
   }
 
   private ServiceItem apply(ServiceItem service, ServiceItemRequest request) {
@@ -55,4 +55,3 @@ public class ServiceItemService {
     return new ServiceItemResponse(service.getId(), service.getName(), service.getDescription(), service.getDurationMinutes(), service.getPrice(), service.getActive());
   }
 }
-

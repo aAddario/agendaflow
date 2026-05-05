@@ -10,7 +10,7 @@
   <groupId>com.agendaflow</groupId>
   <artifactId>api</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <name>AgendaFlow API</name>
+  <name>API AgendaFlow</name>
   <properties>
     <java.version>17</java.version>
   </properties>
@@ -81,4 +81,3 @@
     </plugins>
   </build>
 </project>
-

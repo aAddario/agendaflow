@@ -8,30 +8,30 @@ import { ServiceItem } from '../../core/models';
   standalone: true,
   imports: [ReactiveFormsModule, CurrencyPipe],
   template: `
-    <header class="page-header"><h1>Services</h1></header>
+    <header class="page-header"><h1>Serviços</h1></header>
     <section class="grid-two">
       <form class="panel" [formGroup]="form" (ngSubmit)="save()">
-        <h2>{{ editingId ? 'Edit service' : 'New service' }}</h2>
-        <label>Name <input formControlName="name"></label>
-        <label>Description <textarea formControlName="description"></textarea></label>
-        <label>Duration minutes <input type="number" formControlName="durationMinutes"></label>
-        <label>Price <input type="number" formControlName="price"></label>
-        <label class="inline"><input type="checkbox" formControlName="active"> Active</label>
-        <button type="submit" [disabled]="form.invalid">Save</button>
-        <button type="button" class="ghost" (click)="reset()">Clear</button>
+        <h2>{{ editingId ? 'Editar serviço' : 'Novo serviço' }}</h2>
+        <label>Nome <input formControlName="name"></label>
+        <label>Descrição <textarea formControlName="description"></textarea></label>
+        <label>Duração em minutos <input type="number" formControlName="durationMinutes"></label>
+        <label>Preço <input type="number" formControlName="price"></label>
+        <label class="inline"><input type="checkbox" formControlName="active"> Ativo</label>
+        <button type="submit" [disabled]="form.invalid">Salvar</button>
+        <button type="button" class="ghost" (click)="reset()">Limpar</button>
       </form>
       <section class="panel">
         <table>
-          <thead><tr><th>Name</th><th>Duration</th><th>Price</th><th></th></tr></thead>
+          <thead><tr><th>Nome</th><th>Duração</th><th>Preço</th><th></th></tr></thead>
           <tbody>
             @for (service of services; track service.id) {
               <tr [class.muted]="!service.active">
                 <td>{{ service.name }}</td>
                 <td>{{ service.durationMinutes }} min</td>
-                <td>{{ service.price | currency }}</td>
+                <td>{{ service.price | currency:'BRL' }}</td>
                 <td class="actions">
-                  <button type="button" (click)="edit(service)">Edit</button>
-                  <button type="button" class="danger" (click)="remove(service)">Deactivate</button>
+                  <button type="button" (click)="edit(service)">Editar</button>
+                  <button type="button" class="danger" (click)="remove(service)">Desativar</button>
                 </td>
               </tr>
             }

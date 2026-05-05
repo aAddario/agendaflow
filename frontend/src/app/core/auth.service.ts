@@ -35,4 +35,3 @@ export class AuthService {
     localStorage.setItem('agendaflow_user', JSON.stringify(response.user));
   }
 }
-

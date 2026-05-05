@@ -1,22 +1,22 @@
 # AgendaFlow
 
-Sistema full stack de agendamento para pequenos negocios, construido com Java, Spring Boot, Angular e PostgreSQL.
+Sistema full stack de agendamento para pequenos negócios, construído com Java, Spring Boot, Angular e PostgreSQL.
 
 ## Funcionalidades
 
 - Cadastro e login com JWT.
 - CRUD de clientes.
-- CRUD de servicos.
+- CRUD de serviços.
 - CRUD de agendamentos.
-- Calculo automatico do horario final.
-- Bloqueio de conflito de horarios ativos.
-- Dashboard com resumo operacional.
-- Documentacao OpenAPI/Swagger.
+- Cálculo automático do horário final.
+- Bloqueio de conflito de horários ativos.
+- Painel com resumo operacional.
+- Documentação OpenAPI/Swagger.
 
 ## Stack
 
 - Backend: Java 17+, Spring Boot, Spring Web, Spring Data JPA, Spring Security, JWT, Bean Validation, Flyway, PostgreSQL.
-- Frontend: Angular, TypeScript, Router, Reactive Forms, HTTP Client, interceptor JWT, auth guard.
+- Frontend: Angular, TypeScript, Router, Reactive Forms, HTTP Client, interceptor JWT, guard de autenticação.
 - Infra: Docker Compose.
 
 ## Como rodar
@@ -46,15 +46,15 @@ Backend: `http://localhost:8080`
 Swagger: `http://localhost:8080/swagger-ui.html`
 Frontend: `http://localhost:4200`
 
-## Configuracao
+## Configuração
 
-O backend usa PostgreSQL local por padrao:
+O backend usa PostgreSQL local por padrão:
 
-- Database: `agendaflow`
-- User: `agendaflow`
-- Password: `agendaflow`
+- Banco: `agendaflow`
+- Usuário: `agendaflow`
+- Senha: `agendaflow`
 
-Em producao, defina `JWT_SECRET` com valor forte.
+Em produção, defina `JWT_SECRET` com valor forte.
 
 ## Endpoints principais
 
@@ -70,25 +70,24 @@ Em producao, defina `JWT_SECRET` com valor forte.
 - `PATCH /api/appointments/{id}/done`
 - `GET /api/dashboard/summary`
 
-## Regra de conflito de horario
+## Regra de conflito de horário
 
-Ao criar ou editar agendamento, a API calcula o fim usando a duracao do servico e bloqueia sobreposicao ativa:
+Ao criar ou editar agendamento, a API calcula o fim usando a duração do serviço e bloqueia sobreposição ativa:
 
 ```text
 novoInicio < existenteFim && novoFim > existenteInicio
 ```
 
-Agendamentos cancelados nao bloqueiam horario.
+Agendamentos cancelados não bloqueiam horário.
 
 ## Credenciais de teste
 
-Crie pelo formulario de cadastro ou via `POST /api/auth/register`.
+Crie pelo formulário de cadastro ou via `POST /api/auth/register`.
 
-## Proximos passos
+## Próximos passos
 
 - Testes automatizados.
-- Paginacao e ordenacao.
-- Calendario visual.
+- Paginação e ordenação.
+- Calendário visual.
 - Refresh token.
 - Deploy backend e frontend.
-

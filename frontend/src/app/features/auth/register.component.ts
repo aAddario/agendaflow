@@ -9,15 +9,15 @@ import { ErrorMessageComponent } from '../../shared/error-message.component';
   imports: [ReactiveFormsModule, RouterLink, ErrorMessageComponent],
   template: `
     <section class="auth-card">
-      <h1>Create account</h1>
+      <h1>Criar conta</h1>
       <form [formGroup]="form" (ngSubmit)="submit()">
-        <label>Name <input formControlName="name"></label>
+        <label>Nome <input formControlName="name"></label>
         <label>Email <input type="email" formControlName="email"></label>
-        <label>Password <input type="password" formControlName="password"></label>
+        <label>Senha <input type="password" formControlName="password"></label>
         <app-error-message [message]="error" />
-        <button type="submit" [disabled]="form.invalid">Register</button>
+        <button type="submit" [disabled]="form.invalid">Cadastrar</button>
       </form>
-      <a routerLink="/login">Already have an account</a>
+      <a routerLink="/login">Já tenho conta</a>
     </section>
   `
 })
@@ -34,8 +34,7 @@ export class RegisterComponent {
   submit() {
     this.auth.register(this.form.value.name ?? '', this.form.value.email ?? '', this.form.value.password ?? '').subscribe({
       next: () => this.router.navigateByUrl('/dashboard'),
-      error: () => this.error = 'Could not create account.'
+      error: () => this.error = 'Não foi possível criar a conta.'
     });
   }
 }
-

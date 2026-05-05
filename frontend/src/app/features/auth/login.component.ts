@@ -12,11 +12,11 @@ import { ErrorMessageComponent } from '../../shared/error-message.component';
       <h1>AgendaFlow</h1>
       <form [formGroup]="form" (ngSubmit)="submit()">
         <label>Email <input type="email" formControlName="email"></label>
-        <label>Password <input type="password" formControlName="password"></label>
+        <label>Senha <input type="password" formControlName="password"></label>
         <app-error-message [message]="error" />
-        <button type="submit" [disabled]="form.invalid">Login</button>
+        <button type="submit" [disabled]="form.invalid">Entrar</button>
       </form>
-      <a routerLink="/register">Create account</a>
+      <a routerLink="/register">Criar conta</a>
     </section>
   `
 })
@@ -32,8 +32,7 @@ export class LoginComponent {
   submit() {
     this.auth.login(this.form.value.email ?? '', this.form.value.password ?? '').subscribe({
       next: () => this.router.navigateByUrl('/dashboard'),
-      error: () => this.error = 'Invalid email or password.'
+      error: () => this.error = 'Email ou senha inválidos.'
     });
   }
 }
-

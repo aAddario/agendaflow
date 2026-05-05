@@ -7,7 +7,7 @@ plano-apresentacao-agendaflow.md
 .env.*
 !.env.example
 application-local.yml
-git-store/
+git-store*/
 
 # Java / Maven
 target/

@@ -66,7 +66,7 @@ public class AppointmentService {
   }
 
   Appointment get(Long id) {
-    return appointments.findById(id).orElseThrow(() -> new ApiException(HttpStatus.NOT_FOUND, "Appointment not found."));
+    return appointments.findById(id).orElseThrow(() -> new ApiException(HttpStatus.NOT_FOUND, "Agendamento não encontrado."));
   }
 
   AppointmentResponse toResponse(Appointment appointment) {
@@ -87,12 +87,12 @@ public class AppointmentService {
     var client = clientService.get(request.clientId());
     var serviceItem = serviceItemService.get(request.serviceItemId());
     if (!Boolean.TRUE.equals(serviceItem.getActive())) {
-      throw new ApiException(HttpStatus.BAD_REQUEST, "Inactive service cannot be scheduled.");
+      throw new ApiException(HttpStatus.BAD_REQUEST, "Serviço inativo não pode ser agendado.");
     }
     var endTime = request.startTime().plusMinutes(serviceItem.getDurationMinutes());
     Long ignoredId = appointment.getId();
     if (appointments.existsConflict(ignoredId, request.startTime(), endTime)) {
-      throw new ApiException(HttpStatus.CONFLICT, "There is already an appointment for this time.");
+      throw new ApiException(HttpStatus.CONFLICT, "Já existe um agendamento para esse horário.");
     }
     appointment.setClient(client);
     appointment.setServiceItem(serviceItem);
@@ -105,4 +105,3 @@ public class AppointmentService {
     return toResponse(appointments.save(appointment));
   }
 }
-

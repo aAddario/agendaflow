@@ -8,53 +8,53 @@ import { Appointment, AppointmentStatus, Client, ServiceItem } from '../../core/
   standalone: true,
   imports: [ReactiveFormsModule, DatePipe],
   template: `
-    <header class="page-header"><h1>Appointments</h1></header>
+    <header class="page-header"><h1>Agendamentos</h1></header>
     <section class="grid-two">
       <form class="panel" [formGroup]="form" (ngSubmit)="save()">
-        <h2>{{ editingId ? 'Edit appointment' : 'New appointment' }}</h2>
-        <label>Client
+        <h2>{{ editingId ? 'Editar agendamento' : 'Novo agendamento' }}</h2>
+        <label>Cliente
           <select formControlName="clientId">
             @for (client of clients; track client.id) {
               <option [ngValue]="client.id">{{ client.name }}</option>
             }
           </select>
         </label>
-        <label>Service
+        <label>Serviço
           <select formControlName="serviceItemId">
             @for (service of activeServices; track service.id) {
               <option [ngValue]="service.id">{{ service.name }} - {{ service.durationMinutes }} min</option>
             }
           </select>
         </label>
-        <label>Start time <input type="datetime-local" formControlName="startTime"></label>
-        <label>Notes <textarea formControlName="notes"></textarea></label>
+        <label>Início <input type="datetime-local" formControlName="startTime"></label>
+        <label>Observações <textarea formControlName="notes"></textarea></label>
         @if (error) { <p class="error">{{ error }}</p> }
-        <button type="submit" [disabled]="form.invalid">Save</button>
-        <button type="button" class="ghost" (click)="reset()">Clear</button>
+        <button type="submit" [disabled]="form.invalid">Salvar</button>
+        <button type="button" class="ghost" (click)="reset()">Limpar</button>
       </form>
       <section class="panel">
         <div class="filters">
           <input type="date" [value]="dateFilter" (input)="setDate($any($event.target).value)">
           <select [value]="statusFilter" (change)="setStatus($any($event.target).value)">
-            <option value="">All</option>
-            <option value="SCHEDULED">Scheduled</option>
-            <option value="DONE">Done</option>
-            <option value="CANCELLED">Cancelled</option>
+            <option value="">Todos</option>
+            <option value="SCHEDULED">Agendado</option>
+            <option value="DONE">Concluído</option>
+            <option value="CANCELLED">Cancelado</option>
           </select>
         </div>
         <table>
-          <thead><tr><th>When</th><th>Client</th><th>Service</th><th>Status</th><th></th></tr></thead>
+          <thead><tr><th>Quando</th><th>Cliente</th><th>Serviço</th><th>Status</th><th></th></tr></thead>
           <tbody>
             @for (appointment of appointments; track appointment.id) {
               <tr>
                 <td>{{ appointment.startTime | date:'short' }}</td>
                 <td>{{ appointment.clientName }}</td>
                 <td>{{ appointment.serviceName }}</td>
-                <td><span class="badge">{{ appointment.status }}</span></td>
+                <td><span class="badge">{{ statusLabel(appointment.status) }}</span></td>
                 <td class="actions">
-                  <button type="button" (click)="edit(appointment)">Edit</button>
-                  <button type="button" (click)="done(appointment)">Done</button>
-                  <button type="button" class="danger" (click)="cancel(appointment)">Cancel</button>
+                  <button type="button" (click)="edit(appointment)">Editar</button>
+                  <button type="button" (click)="done(appointment)">Concluir</button>
+                  <button type="button" class="danger" (click)="cancel(appointment)">Cancelar</button>
                 </td>
               </tr>
             }
@@ -110,7 +110,7 @@ export class AppointmentsComponent implements OnInit {
     };
     this.api.saveAppointment(payload).subscribe({
       next: () => { this.reset(); this.load(); },
-      error: err => this.error = err.error?.message ?? 'Could not save appointment.'
+      error: err => this.error = err.error?.message ?? 'Não foi possível salvar o agendamento.'
     });
   }
 
@@ -145,5 +145,14 @@ export class AppointmentsComponent implements OnInit {
   reset() {
     this.editingId = undefined;
     this.form.reset({ clientId: 0, serviceItemId: 0, startTime: '', notes: '' });
+  }
+
+  statusLabel(status?: AppointmentStatus) {
+    const labels: Record<AppointmentStatus, string> = {
+      SCHEDULED: 'Agendado',
+      DONE: 'Concluído',
+      CANCELLED: 'Cancelado'
+    };
+    return status ? labels[status] : '';
   }
 }

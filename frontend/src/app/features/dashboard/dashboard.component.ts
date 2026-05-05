@@ -8,19 +8,19 @@ import { DashboardSummary } from '../../core/models';
   imports: [DatePipe],
   template: `
     <header class="page-header">
-      <h1>Dashboard</h1>
+      <h1>Painel</h1>
     </header>
     @if (summary) {
       <section class="metrics">
-        <article><span>Clients</span><strong>{{ summary.totalClients }}</strong></article>
-        <article><span>Active services</span><strong>{{ summary.totalServices }}</strong></article>
-        <article><span>Today</span><strong>{{ summary.appointmentsToday }}</strong></article>
-        <article><span>Scheduled</span><strong>{{ summary.scheduledAppointments }}</strong></article>
-        <article><span>Done</span><strong>{{ summary.doneAppointments }}</strong></article>
-        <article><span>Cancelled</span><strong>{{ summary.cancelledAppointments }}</strong></article>
+        <article><span>Clientes</span><strong>{{ summary.totalClients }}</strong></article>
+        <article><span>Serviços ativos</span><strong>{{ summary.totalServices }}</strong></article>
+        <article><span>Hoje</span><strong>{{ summary.appointmentsToday }}</strong></article>
+        <article><span>Agendados</span><strong>{{ summary.scheduledAppointments }}</strong></article>
+        <article><span>Concluídos</span><strong>{{ summary.doneAppointments }}</strong></article>
+        <article><span>Cancelados</span><strong>{{ summary.cancelledAppointments }}</strong></article>
       </section>
       <section class="panel">
-        <h2>Next appointments</h2>
+        <h2>Próximos agendamentos</h2>
         <table>
           <tbody>
             @for (appointment of summary.nextAppointments; track appointment.id) {
